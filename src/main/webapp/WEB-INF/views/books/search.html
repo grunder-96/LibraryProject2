@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Страница поиска</title>
+</head>
+<body>
+	<form th:method="POST" th:action="@{/books/search}">
+		<label for="substrId">Введите название книги:</label> 
+		<input type="text" name="substrName" id="substrId"> 
+		<br>
+		<input type="submit" value="Найти">
+		<br>
+		<div th:if="${books}">
+			<p th:if="${books.isEmpty()}">Такой книги нет!</p>
+			
+			<div th:each="book : ${books}">
+				<a th:href="@{/books/{id}(id=${book.id})}" th:text="${book.name + ', ' + book.author + ', ' + book.yearOfPublication}"></a>
+				<p th:if="${book.getHuman() != null}" th:text="'В настоящий момент книга у: ' + ${book.getHuman().getFullName()}"></p>
+				<p th:if="${book.getHuman() == null}" th:text="'Книга ни за кем не числится'"></p>
+				<hr>
+			</div>
+		</div>
+	</form>
+</body>
+</html>

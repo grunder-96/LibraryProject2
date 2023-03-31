@@ -1,0 +1,7 @@
+.classpath
+.project
+.settings/
+bin/
+target/
+src/test
+src/main/resources/hibernate.properties
